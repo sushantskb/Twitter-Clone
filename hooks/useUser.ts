@@ -1,8 +1,9 @@
 import fetcher from "@/lib/fetcher";
 import useSWR from "swr";
 const useUser = (userId: string) => {
+  const url = userId ? `/api/users/${userId}` : null;
   const { data, error, isLoading, mutate } = useSWR(
-    `api/users/${userId}`,
+    url,
     fetcher
   );
 

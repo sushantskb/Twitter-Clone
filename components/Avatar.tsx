@@ -40,7 +40,7 @@ const Avatar: React.FC<AvatarProps> = ({ userId, isLarge, hasBorder }) => {
           alt="Avatar"
           onClick={onClick}
           src={
-            fetchUser?.profileImage || "/images/avatar.webp"
+            fetchUser?.user?.profileImage || "/images/avatar.webp"
           }
         />
       }
