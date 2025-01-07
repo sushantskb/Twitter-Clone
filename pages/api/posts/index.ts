@@ -11,18 +11,13 @@ export default async function handler(
 
   try {
     if (req.method === "POST") {
-      const { currentUser } = await serverAuth(req);
-
-      const { body } = req.body;
-
-      if (!body || typeof body !== "string") {
-        throw new Error("Invalid body");
-      }
+      const { userId } = req.query as { userId: string };
+      const { body } = req.body
 
       const post = await prisma.post.create({
         data: {
           body,
-          userId: currentUser.id,
+          userId,
         },
       });
 
@@ -60,7 +55,10 @@ export default async function handler(
       return res.status(200).json(posts);
     }
   } catch (error) {
-    console.log(error);
+    if (error instanceof Error) {
+      console.log(error.stack);
+    }
+
     return res.status(400).end();
   }
 }
