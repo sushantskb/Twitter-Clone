@@ -3,7 +3,6 @@ import useCurrentUser from "./useCurrentUser";
 import useLoginModal from "./useLoginModal";
 import useUser from "./useUser";
 import axios from "axios";
-import { mutate } from "swr";
 import toast from "react-hot-toast";
 
 const useFollow = (userId: string) => {
