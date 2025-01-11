@@ -1,12 +1,12 @@
-import serverAuth from "@/lib/serverAuth";
+// import serverAuth from "@/lib/serverAuth";
 import { NextApiRequest, NextApiResponse } from "next";
 import prisma from "@/lib/prismadb";
-export async function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
     const { userId } = req.body;
 
-    const { currentUser } = await serverAuth(req);
-
+    const {currentUserId} = req.query;
+    
     const user = await prisma.user.findUnique({
       where: {
         id: userId,
@@ -31,7 +31,7 @@ export async function handler(req: NextApiRequest, res: NextApiResponse) {
 
     const updatedUser = await prisma.user.update({
       where: {
-        id: currentUser.id,
+        id: currentUserId,
       },
       data: {
         followingIds: updatedFollowingIds,
@@ -40,7 +40,7 @@ export async function handler(req: NextApiRequest, res: NextApiResponse) {
 
     return res.status(200).json(updatedUser);
   } catch (error) {
-    console.log(error);
+    console.log("Error", error);
     return res.status(400).end();
   }
 }
