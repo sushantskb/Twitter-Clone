@@ -10,9 +10,10 @@ export default async function handler(
 
   try {
     const { postId } = req.body;
-    const { currentUserId } = req.query;
 
-    if (!postId || postId !== "string") {
+    const { currentUserId } = req.query as { currentUserId: string };
+
+    if (!postId || typeof postId !== "string") {
       throw new Error("Invalid Id");
     }
 
@@ -46,7 +47,7 @@ export default async function handler(
     });
 
     return res.status(200).json(updatedPost);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (error) {
     // console.log("Error", error);
     return res.status(400).end();
