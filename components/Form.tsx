@@ -1,12 +1,13 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import useCurrentUser from "@/hooks/useCurrentUser";
 import useLoginModal from "@/hooks/useLoginModal";
 import usePosts from "@/hooks/usePosts";
 import useRegister from "@/hooks/useRegisterMiodal";
 import axios from "axios";
-import React, { FC, useCallback, useState } from "react";
+import React, { useCallback, useState } from "react";
 import toast from "react-hot-toast";
-import Button from "./Button";
 import Avatar from "./Avatar";
+import Button from "./Button";
 interface FormProps {
   placeholder: string;
   isComment?: boolean;
@@ -25,7 +26,10 @@ const Form: React.FC<FormProps> = ({ placeholder, isComment, postId }) => {
   const onSubmit = useCallback(async () => {
     setIsLoading(true);
     try {
-      await axios.post(`/api/posts?userId=${currentUser.id}`, { body });
+      const url = isComment
+        ? `/api/comments?postId=${postId}&currentUserId=${currentUser.id}`
+        : `/api/posts?userId=${currentUser.id}`;
+      await axios.post(url, { body });
       toast.success("Tweet created");
       setBody("");
       mutatePosts();
@@ -34,7 +38,7 @@ const Form: React.FC<FormProps> = ({ placeholder, isComment, postId }) => {
     } finally {
       setIsLoading(false);
     }
-  }, [body, mutatePosts]);
+  }, [body, mutatePosts, postId, isComment]);
   return (
     <div className="border-b-[1px] border-neutral-800 px-5 py-2">
       {currentUser ? (
