@@ -1,12 +1,15 @@
 // import serverAuth from "@/lib/serverAuth";
 import { NextApiRequest, NextApiResponse } from "next";
 import prisma from "@/lib/prismadb";
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   try {
     const { userId } = req.body;
 
-    const {currentUserId} = req.query;
-    
+    const { currentUserId } = req.query as { currentUserId: string };
+
     const user = await prisma.user.findUnique({
       where: {
         id: userId,
@@ -21,6 +24,26 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     if (req.method === "POST") {
       updatedFollowingIds.push(userId);
+
+      try {
+        await prisma.noitification.create({
+          data: {
+            body: "Someone followed you!",
+            userId,
+          },
+        });
+
+        await prisma.user.update({
+          where: {
+            id: userId,
+          },
+          data: {
+            hasNotification: true,
+          },
+        });
+      } catch (error) {
+        console.log(error);
+      }
     }
 
     if (req.method === "DELETE") {
