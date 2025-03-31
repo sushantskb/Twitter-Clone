@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import useCurrentUser from "@/hooks/useCurrentUser";
 import useEditModal from "@/hooks/useEditModal";
 import useUser from "@/hooks/useUser";
@@ -59,7 +60,7 @@ const EditModal = () => {
     } finally {
       setIsLaoding(false);
     }
-  }, [currentUser.id, name, username, bio, profileImage, coverImage, mutateFetchedUser, editModal]);
+  }, [name, username, bio, profileImage, coverImage, mutateFetchedUser, editModal]);
 
   const bodyContent = (
     <div className="flex flex-col gap-4">

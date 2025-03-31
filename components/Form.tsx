@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import useCurrentUser from "@/hooks/useCurrentUser";
 import useLoginModal from "@/hooks/useLoginModal";
@@ -41,7 +42,7 @@ const Form: React.FC<FormProps> = ({ placeholder, isComment, postId }) => {
     } finally {
       setIsLoading(false);
     }
-  }, [isComment, postId, currentUser.id, body, mutatePosts, mutatePost]);
+  }, [body, mutatePosts, postId, isComment, mutatePost]);
   return (
     <div className="border-b-[1px] border-neutral-800 px-5 py-2">
       {currentUser ? (
