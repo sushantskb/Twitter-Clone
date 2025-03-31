@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import useUser from "@/hooks/useUser";
 import Image from "next/image";
 import { useRouter } from "next/router";

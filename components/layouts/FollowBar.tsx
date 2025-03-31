@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import useUsers from "@/hooks/useUsers";
 import React from "react";
 import Avatar from "../Avatar";

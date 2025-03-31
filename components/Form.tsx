@@ -41,7 +41,7 @@ const Form: React.FC<FormProps> = ({ placeholder, isComment, postId }) => {
     } finally {
       setIsLoading(false);
     }
-  }, [body, mutatePosts, postId, isComment, mutatePost]);
+  }, [isComment, postId, currentUser.id, body, mutatePosts, mutatePost]);
   return (
     <div className="border-b-[1px] border-neutral-800 px-5 py-2">
       {currentUser ? (

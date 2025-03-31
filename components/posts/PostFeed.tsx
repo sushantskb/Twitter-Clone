@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import usePosts from "@/hooks/usePosts";
 import React from "react";
 import PostItem from "./PostItem";

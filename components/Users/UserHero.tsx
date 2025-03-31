@@ -1,7 +1,6 @@
 import useUser from "@/hooks/useUser";
 import Image from "next/image";
 import React from "react";
-import { CgOverflow } from "react-icons/cg";
 import Avatar from "../Avatar";
 interface userHeroProps {
   userId: string;

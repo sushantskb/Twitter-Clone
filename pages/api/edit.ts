@@ -1,6 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import prisma from "@/lib/prismadb";
-import serverAuth from "@/lib/serverAuth";
 export default async function editHandler(
   req: NextApiRequest,
   res: NextApiResponse

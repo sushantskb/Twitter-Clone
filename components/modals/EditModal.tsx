@@ -53,11 +53,13 @@ const EditModal = () => {
       toast.success("Updated");
       editModal.onClose();
     } catch (error) {
+      console.log(error);
+      
       toast.error("Something went wrong");
     } finally {
       setIsLaoding(false);
     }
-  }, [name, username, bio, profileImage, coverImage, mutateFetchedUser]);
+  }, [currentUser.id, name, username, bio, profileImage, coverImage, mutateFetchedUser, editModal]);
 
   const bodyContent = (
     <div className="flex flex-col gap-4">
